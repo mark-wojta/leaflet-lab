@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+		<head>
+				<meta charset="utf-8">
+				<meta name="viewport" content="width=device-width">
+				<title>Real GDP Trends in Midwest, USA</title>
+
+				<!--put your external stylesheet links here-->
+				<link rel="stylesheet" href="css/style.css">
+				<link rel="leaflet" href="lib/leaflet.css">
+				<!--[if IE<9]>
+					<link rel="stylesheet" href="css/style.ie.css">
+				<![endif]-->
+				<link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+		    integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+		    crossorigin=""/>
+				<link href='https://api.mapbox.com/mapbox-gl-js/v1.11.0/mapbox-gl.css' rel='stylesheet' />
+				<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+				<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+				<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+				<link rel="manifest" href="/site.webmanifest">
+		</head>
+
+		<body>
+				<div class="container-fluid">
+						<h1>
+				        Real Gross Domestic Product Trends of Metropolitan Stastical Areas in the Midwestern United States.
+				    </h1>
+						<p>
+							Featuring an interactive map displaying real GDP, this website was designed to help the user think about and
+							understand the economies of the most highly populated Metropolitan Stastical Areas(MSA) in the Midwestern United States from 2001 to 2018.
+							An area is considered a part of a MSA if it consists, "of the county or counties (or equivalent entities) associated with at least one urbanized
+							area of at least 50,000 population, plus adjacent counties having a high degree of social and economic integration with the core as measured through
+							commuting ties."(United States Census Bureau). The Midwest region of the United States consists of 12 states; Illinois, Indiana, Iowa, Kansas,
+							Michigan, Minnesota, Missouri, Nebraska, North Dakota, Ohio, South Dakota, and Wisconsin (U.S. Bureau of Labor Statistics). Understanding economics
+							of MSAs in the Midwest states is important because it can explain, "how people, businesses, and governments respond to their economic
+							environments. Many of the issues that fill the newspapers — jobs, wages, taxes, the cost of living, inequality, pollution, poverty, and
+							economic growth — are, in fundamental ways, economic issues. The daily decisions of businesses and consumers are largely
+							economic" (University of Wisconsin - Madison).
+						</p>
+						<p>
+							This site uses real GDP to examine economic trends. GDP must be understood before understanding real GDP. "Gross
+							Domestic Product(GDP) is one of the "vital signs" used to measure the health of a nation’s economy. GDP measures the market
+							value of the goods and services produced in a country. It’s used to measure and compare economies around the world" (Bureau
+							of Economic Analysis). Now that GDP is understood, "Real GDP by metropolitan area is an inflation-adjusted measure of each
+							area's gross product that is based on national prices for the goods and services produced within the area" (Bureau of
+							Economic Analysis). In the interactive map below, a user can examine and compare real GDP for cities predominantly associated
+							with MSAs in the Midwest region of the United States.
+		        </p>
+				</div>
+				<!-- map #side note: id should be used for 1 element to be manipulated, class for more than 1-->
+				<div class="container-fluid">
+						<div class="container-map">
+								<div id='map'></div>
+						</div>
+				</div>
+				<!-->
+				<nav class='menu-ui'>
+						<a href='#' class='active' data-filter='all'>Show all MSAs</a>
+						<a href='#' data-filter='over60mil'>real GDP>$60 mil</a>
+						<a href='#' data-filter='under60mil'>real GDP<$60 mil</a>
+						<a href='#' data-filter='multiState'>Multi-state MSAs</a>
+						<a href='#' data-filter='singleState'>Single-state MSAs</a>
+				</nav>
+				<!-->
+
+				<!--put your initial page content here-->
+
+				<!--you can also use this space for internal scripts or stylesheets;
+				place these within <script> or <style> tags-->
+
+				<!--put your external script links here-->
+				<script type="text/javascript" src="lib/leaflet-src.js"></script>
+				<script type="text/javascript" src="lib/jquery-3.5.1.js"></script>
+				<script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+		    integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+		    crossorigin=""></script>
+				<script src='https://api.mapbox.com/mapbox-gl-js/v1.11.0/mapbox-gl.js'></script>
+				<script type="text/javascript" src="js/main.js"></script>
+				<script type="text/javascript" src="js/geojson.js"></script>
+				<div class="container-fluid">
+						<p>
+								Conclusion: Discuss analysis in real GDP table
+		        </p>
+				</div>
+		</body>
+
+		<footer>
+						Sources:
+						<br>
+						Previous and Next Button icons from https://thenounproject.com/ created by BT Hai
+						<br>
+						Real GDP of MSAs data https://apps.bea.gov/itable/iTable.cfm?ReqID=70&step=1 provided by Bureau of Economic Analysis
+						<br>
+						Economics information https://guide.wisc.edu/undergraduate/letters-science/economics/economics-bs/ provided by the University of Wisconsin - Madison
+						<br>
+						Midwest States https://www.bls.gov/regions/midwest/midwest.htm
+						<br>
+						Midwest population data https://www.census.gov/data/tables/time-series/demo/popest/2010s-total-metro-and-micro-statistical-areas.html
+						<br>
+						Metropolitan Areas Definition https://www.census.gov/programs-surveys/metro-micro/about/glossary.html provided by United States Census Bureau
+    </footer>
+
+</html>

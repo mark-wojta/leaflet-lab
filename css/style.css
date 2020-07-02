@@ -1,0 +1,100 @@
+/* Stylesheet by Mark Wojta, 2020 */
+#map {
+   height: 500px;
+   width: 90%;
+   display: inline-block;
+   text-align: center;
+}
+
+.container-map { text-align: center;
+}
+
+#forward {
+    float: right;
+    width: 38px;
+    height: 35px;
+}
+
+#reverse {
+    float: left;
+    width: 38px;
+    height: 35px;
+}
+
+.sequence-control-container {
+    width: 297px;
+    height: 30px;
+    background-color: rgba(255,255,255,0.8);
+    padding: 10px;
+    line-height: 45px;
+    text-align: center;
+    border: solid gray 1px;
+}
+
+.range-slider {
+    width: 200px;
+}
+
+.legend-control-container {
+    width: 195px;
+    height: 105px;
+    background-color: rgba(255,255,255,0.8);
+    padding: 10px;
+    line-height: 15px;
+    text-align: center;
+    border: solid gray 1px;
+}
+
+/*
+.menu-ui {
+    background:#fff;
+    position:absolute;
+    top:10px;right:10px;
+    z-index:1;
+    border-radius:3px;
+    width:120px;
+    border:1px solid rgba(0,0,0,0.4);
+}
+
+.menu-ui a {
+    font-size:13px;
+    color:#404040;
+    display:block;
+    margin:0;padding:0;
+    padding:10px;
+    text-decoration:none;
+    border-bottom:1px solid rgba(0,0,0,0.25);
+    text-align:center;
+}
+
+.menu-ui a:first-child {
+    border-radius:3px 3px 0 0;
+}
+
+.menu-ui a:last-child {
+    border:none;
+    border-radius:0 0 3px 3px;
+}
+
+.menu-ui a:hover {
+    background:#f8f8f8;
+    color:#404040;
+}
+
+.menu-ui a.active,
+.menu-ui a.active:hover {
+    background:#3887BE;
+    color:#FFF;
+}
+*/
+
+.container-fluid {padding-left: 55px; padding-right: 55px}
+
+h1 {font-size: 25px;}
+p {text-align: justify; padding-left: 15px; padding-right: 15px}
+footer {padding-left: 100px; padding-right: 100px; font-size: 10px;
+}
+html {background-color: rgba(51, 204, 51, 0.2);}
+
+.leaflet-popup-content p { font-size: 12px; font-family: serif; font-weight: bolder;
+  padding: 0; margin: -55px; list-style: none; }

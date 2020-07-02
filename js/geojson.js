@@ -1,0 +1,1 @@
+/* loading geoJSON file to leaflet map with AJAX and jQuery */
