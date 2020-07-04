@@ -3,6 +3,8 @@
 		<head>
 				<meta charset="utf-8">
 				<meta name="viewport" content="width=device-width">
+				<meta name="author" content="Mark Wojta">
+				<meta name="description" content="Real GDP Trends in Midwest, USA">
 				<title>Real GDP Trends in Midwest, USA</title>
 
 				<!--put your external stylesheet links here-->
@@ -28,21 +30,21 @@
 				    </h1>
 						<p>
 							Featuring an interactive map displaying real GDP, this website was designed to help the user think about and
-							understand the economies of the most highly populated Metropolitan Stastical Areas(MSA) in the Midwestern United States from 2001 to 2018.
-							An area is considered a part of a MSA if it consists, "of the county or counties (or equivalent entities) associated with at least one urbanized
-							area of at least 50,000 population, plus adjacent counties having a high degree of social and economic integration with the core as measured through
-							commuting ties."(United States Census Bureau). The Midwest region of the United States consists of 12 states; Illinois, Indiana, Iowa, Kansas,
-							Michigan, Minnesota, Missouri, Nebraska, North Dakota, Ohio, South Dakota, and Wisconsin (U.S. Bureau of Labor Statistics). Understanding economics
-							of MSAs in the Midwest states is important because it can explain, "how people, businesses, and governments respond to their economic
+							understand the economies of the most highly populated Metropolitan Stastical Areas in the Midwestern United States from 2001 to 2018.
+							An area is considered a part of a <b>Metropolitan Stastical Areas(MSA)</b> if it consists, "of the county or counties (or equivalent entities) associated with at
+							least one urbanized area of at least 50,000 population, plus adjacent counties having a high degree of social and economic integration with the core as measured through
+							commuting ties."(United States Census Bureau). The <b>Midwest region</b> of the United States consists of 12 states; Illinois, Indiana, Iowa, Kansas,
+							Michigan, Minnesota, Missouri, Nebraska, North Dakota, Ohio, South Dakota, and Wisconsin (U.S. Bureau of Labor Statistics). Understanding <b>economics
+							of MSAs</b> in the Midwest states is important because it can explain, "how people, businesses, and governments respond to their economic
 							environments. Many of the issues that fill the newspapers — jobs, wages, taxes, the cost of living, inequality, pollution, poverty, and
 							economic growth — are, in fundamental ways, economic issues. The daily decisions of businesses and consumers are largely
 							economic" (University of Wisconsin - Madison).
 						</p>
 						<p>
-							This site uses real GDP to examine economic trends. GDP must be understood before understanding real GDP. "Gross
-							Domestic Product(GDP) is one of the "vital signs" used to measure the health of a nation’s economy. GDP measures the market
+							This site uses real GDP to examine economic trends. GDP must be understood before understanding real GDP. "<b>Gross
+							Domestic Product(GDP)</b> is one of the "vital signs" used to measure the health of a nation’s economy. GDP measures the market
 							value of the goods and services produced in a country. It’s used to measure and compare economies around the world" (Bureau
-							of Economic Analysis). Now that GDP is understood, "Real GDP by metropolitan area is an inflation-adjusted measure of each
+							of Economic Analysis). Now that GDP is understood, "<b>Real GDP</b> by metropolitan area is an inflation-adjusted measure of each
 							area's gross product that is based on national prices for the goods and services produced within the area" (Bureau of
 							Economic Analysis). In the interactive map below, a user can examine and compare real GDP for cities predominantly associated
 							with MSAs in the Midwest region of the United States.
@@ -50,17 +52,31 @@
 				</div>
 				<!-- map #side note: id should be used for 1 element to be manipulated, class for more than 1-->
 				<div class="container-fluid">
-						<div class="container-map">
-								<div id='map'></div>
+						<div class="filter-map">
+								<div class="container-map">
+										<div id='map'></div>
+								</div>
+								<div class="panel">
+										<form>
+												<h1> Map Filter for Midwest MSAs </h1>
+												<div id="filterGroup">
+								            <div class="col-xs-4">
+								            <input type= "radio" name="fltGDP" value="All" checked>
+								            <label for="All Midwest MSAs">All Midwest MSAs</label>
+								            </div>
+								            <div class="col-xs-4">
+								            <input type= "radio" id="r1" name="fltGDP" value="TRUE">
+								            <label for="Multi-state Midwest MSAs">Multi-state Midwest MSAs</label>
+								            </div>
+								            <div class="col-xs-4">
+								            <input type= "radio" id="r2" name="fltGDP" value="FALSE">
+								            <label for="Single-state Midwest MSAs">Single-state Midwest MSAs</label>
+								          	</div>
+												</div>
+										</form>
+								</div>
 						</div>
 				</div>
-				<nav class='menu-ui'>
-						<a href='#' class='active' data-filter='all'>Show all MSAs</a>
-						<a href='#' data-filter='over60mil'>real GDP>$60 mil</a>
-						<a href='#' data-filter='under60mil'>real GDP<$60 mil</a>
-						<a href='#' data-filter='multiState'>Multi-state MSAs</a>
-						<a href='#' data-filter='singleState'>Single-state MSAs</a>
-				</nav>
 
 				<!--put your initial page content here-->
 
@@ -85,8 +101,6 @@
 
 		<footer>
 						Sources:
-						<br>
-						Previous and Next Button icons from https://thenounproject.com/ created by BT Hai
 						<br>
 						Real GDP of MSAs data https://apps.bea.gov/itable/iTable.cfm?ReqID=70&step=1 provided by Bureau of Economic Analysis
 						<br>

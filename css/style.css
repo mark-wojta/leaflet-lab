@@ -4,9 +4,11 @@
    width: 90%;
    display: inline-block;
    text-align: center;
+   border:1px solid rgba(0,0,0,0.4);
 }
 
 .container-map { text-align: center;
+margin-top: 25px;
 }
 
 #forward {
@@ -59,7 +61,8 @@
     font-size:13px;
     color:#404040;
     display:block;
-    margin:0;padding:0;
+    margin:0;
+    padding:0;
     padding:10px;
     text-decoration:none;
     border-bottom:1px solid rgba(0,0,0,0.25);
@@ -86,13 +89,52 @@
     color:#FFF;
 }
 
-.container-fluid {padding-left: 55px; padding-right: 55px}
-
-h1 {font-size: 25px;}
-p {text-align: justify; padding-left: 15px; padding-right: 15px}
-footer {padding-left: 100px; padding-right: 100px; font-size: 10px;
+.container-fluid {padding-left: 55px;
+padding-right: 55px
 }
-html {background-color: rgba(51, 204, 51, 0.2);}
 
-.leaflet-popup-content p { font-size: 12px; font-family: serif; font-weight: bolder;
-  padding: 0; margin: -55px; list-style: none; }
+h1 {font-size: 25px;
+  text-align: center;
+}
+
+p {text-align: justify;
+padding-left: 15px;
+padding-right: 15px
+
+
+}
+
+footer {padding-left: 100px;
+padding-right: 100px;
+font-size: 10px;
+}
+
+html {background-color: rgba(51, 204, 51, 0.2);
+}
+
+.leaflet-popup-content p { font-size: 12px;
+font-family: serif;
+font-weight: bolder;
+padding: 0;
+margin: -55px;
+list-style: none;
+}
+
+.panel { padding-left: 55px;
+padding-right: 55px;
+text-align: center;
+margin-top: -15px;
+
+}
+
+#filterGroup { margin-top: -15px;
+margin-bottom: 20px;
+}
+
+.filter-map { background-color: rgba(255,255,255,0.5);
+border:1px solid rgba(0,0,0,0.4);
+
+}
+
+.col-xs-4 { display: inline;
+}

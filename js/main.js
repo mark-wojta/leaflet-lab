@@ -1,17 +1,40 @@
 /* JavaScript by Mark Wojta, 2020 */
-/* creates map starting view/location */
+// majority of JS credited to UW Wisconsin-Madison Department of Geography
 
-var map = L.map('map').setView([42.65, -92.06], 5);
+// creates map and calls data
+function addMap(){
+    //creates map
+    var map = L.map('map').setView([42.65, -92.06], 5);
 
-/* adds map tile set */
-L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
-    attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-    maxZoom: 18,
-    id: 'mapbox/outdoors-v11',
-    tileSize: 512,
-    zoomOffset: -1,
-    accessToken: 'pk.eyJ1IjoibWFyay13b2p0YSIsImEiOiJjazVpc2M0a2IwaHQzM2RtbmZpbXlodjdoIn0.piF_xAWNFZ2dxBhQ8CwXyw'
-}).addTo(map);
+    // adds map tile set
+    L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+        attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+        maxZoom: 18,
+        id: 'mapbox/outdoors-v11',
+        tileSize: 512,
+        zoomOffset: -1,
+        accessToken: 'pk.eyJ1IjoibWFyay13b2p0YSIsImEiOiJjazVpc2M0a2IwaHQzM2RtbmZpbXlodjdoIn0.piF_xAWNFZ2dxBhQ8CwXyw'
+    }).addTo(map);
+
+    //adds Data
+    addData(map);
+};
+
+  //import geoJSON data and call functions
+  function addData(map){
+      //Import GeoJSON data
+      $.ajax("data/realGDP.geojson", {
+          dataType: "json",
+          success: function(response){
+              //create an attributes array
+              var attributes = processData(response);
+              //call functions
+              createPropSymbols(response, map, attributes);
+              createSequenceControls(map, attributes);
+              createLegend(map, attributes);
+          }
+      });
+  };
 
 //build an attributes array from the data
 function processData(data){
@@ -29,31 +52,58 @@ function processData(data){
     return attributes;
 };
 
-//calculate the radius of each proportional symbol
-function calcPropRadius(attValue) {
-    //scale factor to adjust symbol size evenly
-    var scaleFactor = 10;
-    //area based on attribute value and scale factor
-    var area = attValue * scaleFactor;
-    //radius calculated based on area
-    var radius = Math.sqrt(area/Math.PI);
-    return radius;
-};
+//Add circle markers for point features to the map
+//function filter credited to https://badajos.github.io/NetMigrationMap/index.html
+function createPropSymbols(data, map, attributes){
 
-function createPopup(properties, attributes, layer, radius){
-    //added Metropolitan Stastical Area
-    var popupContent = "<p><b>MSA: " + properties.MSA + "</p>";
-    //add city to popup content string
-    popupContent += "<p><b>Predominantly Associated City:</b> " + properties.city + "</p>";
-    //add formatted attribute to panel content string
-    var year = attributes;
-    popupContent += "<p><b>MSA's GDP in " + year + ":</b> $" + properties[attributes] + " million</p>";
-    //added states containing MSA
-    popupContent += "<p><b>MSA's States: " + properties.states + "</p>";
-    //replace the layer popup
-    layer.bindPopup(popupContent, {
-        offset: new L.Point(0,-radius)
+    var attribute = attributes[0];
+
+    var allData = L.layerGroup([]);
+
+    //creates a Leaflet GeoJSON layer and add it to the map
+    var realGDP = L.geoJson(data, {
+        pointToLayer: function(feature, latlng){
+            return pointToLayer(feature, latlng, attributes);
+        }
     });
+    allData.addLayer(realGDP);
+    allData.addTo(map);
+    filter(allData, map);
+    return attribute;
+    return myData;
+
+    //create filters
+    function filter(allData, map) {
+        $("#filterGroup").change(function() {
+            var choice = $("input[name=fltGDP]:checked").val()
+            //console.log(choice)
+            if (choice === "All") {
+                createPropSymbols(data, map, attributes)
+            }
+
+            allData.clearLayers();
+            map.removeLayer(allData);
+
+            var realGDP = L.geoJson(null, {
+
+            pointToLayer: function(feature, latlng){
+                return pointToLayer(feature, latlng, attributes);
+            },
+            filter: function(feature, layer) {
+                        return (feature.properties.multiState == choice);
+                    },
+            });
+
+            // Get GeoJSON data and create features.
+
+            $.getJSON('data/realGDP.geojson', function(data) {
+                    realGDP.addData(data);
+            });
+
+            allData.addLayer(realGDP);
+            allData.addTo(map);
+        });
+    };
 };
 
 //function to convert markers to circle markers
@@ -89,15 +139,31 @@ function pointToLayer(feature, latlng, attributes){
     return layer;
 };
 
-//Add circle markers for point features to the map
-function createPropSymbols(data, map, attributes){
-    //create a Leaflet GeoJSON layer and add it to the map
-    L.geoJson(data, {
-      //TRY TO ADD A FILTER HERE ONCE COMPLETE, filter: ; ajax filter geojson
-        pointToLayer: function(feature, latlng){
-            return pointToLayer(feature, latlng, attributes);
-        }
-    }).addTo(map);
+//calculate the radius of each proportional symbol
+function calcPropRadius(attValue) {
+    //scale factor to adjust symbol size evenly
+    var scaleFactor = 10;
+    //area based on attribute value and scale factor
+    var area = attValue * scaleFactor;
+    //radius calculated based on area
+    var radius = Math.sqrt(area/Math.PI);
+    return radius;
+};
+
+function createPopup(properties, attributes, layer, radius){
+    //added Metropolitan Stastical Area
+    var popupContent = "<p><b>MSA: " + properties.MSA + "</p>";
+    //add city to popup content string
+    popupContent += "<p><b>Predominantly Associated City:</b> " + properties.city + "</p>";
+    //add formatted attribute to panel content string
+    var year = attributes;
+    popupContent += "<p><b>MSA's GDP in " + year + ":</b> $" + properties[attributes] + " billion</p>";
+    //added states containing MSA
+    popupContent += "<p><b>MSA's States: " + properties.states + "</p>";
+    //replace the layer popup
+    layer.bindPopup(popupContent, {
+        offset: new L.Point(0,-radius)
+    });
 };
 
 //Resize proportional symbols according to new attribute values
@@ -113,6 +179,35 @@ function updatePropSymbols(map, attributes){
             updateLegend(map, attributes);
         };
     });
+};
+
+//Calculate the max, mean, and min values for a given attribute
+function getCircleValues(map, attributes){
+    //start with min at highest possible and max at lowest possible number
+    var min = Infinity,
+        max = -Infinity;
+    map.eachLayer(function(layer){
+        //get the attribute value
+        if (layer.feature){
+            var attributeValue = Number(layer.feature.properties[attributes]);
+            //test for min
+            if (attributeValue < min){
+                min = attributeValue;
+            };
+            //test for max
+            if (attributeValue > max){
+                max = attributeValue;
+            };
+        };
+    });
+    //set mean
+    var mean = (max + min) / 2;
+    //return values as an object
+    return {
+        max: max,
+        mean: mean,
+        min: min
+    };
 };
 
 //Create new sequence controls
@@ -132,6 +227,14 @@ function createSequenceControls(map, attributes){
             //kill any mouse event listeners on the map
             $(container).on('mousedown dblclick', function(e){
             L.DomEvent.stopPropagation(e);
+            });
+            //Disable dragging when user's cursor enters the element
+            container.addEventListener('mouseover', function () {
+                map.dragging.disable();
+            });
+            //Re-enable dragging when user's cursor leaves the element
+            container.addEventListener('mouseout', function () {
+                map.dragging.enable();
             });
             // ... initialize other DOM elements, add listeners, etc.
             return container;
@@ -176,6 +279,28 @@ function createSequenceControls(map, attributes){
     });
 };
 
+//Update the legend with new attribute
+function updateLegend(map, attributes){
+    //create content for legend
+    var year = attributes;
+    var content = "Real GDP in " + year;
+    //replace legend content
+    $('#temporal-legend').html(content);
+    //get the max, mean, and min values as an object
+    var circleValues = getCircleValues(map, attributes);
+    for (var key in circleValues){
+        //get the radius
+        var radius = calcPropRadius(circleValues[key]);
+        //assign the cy and r attributes
+        $('#'+key).attr({
+            cy: 92 - radius,
+            r: radius
+        });
+        //add legend text
+        $('#'+key+'-text').text("$" + Math.round(circleValues[key]*100)/100 + " billion");
+    };
+};
+
 //creates legend
 function createLegend(map, attributes){
     var LegendControl = L.Control.extend({
@@ -213,92 +338,5 @@ function createLegend(map, attributes){
     updateLegend(map, attributes[0]);
 };
 
-//Calculate the max, mean, and min values for a given attribute
-function getCircleValues(map, attributes){
-    //start with min at highest possible and max at lowest possible number
-    var min = Infinity,
-        max = -Infinity;
-    map.eachLayer(function(layer){
-        //get the attribute value
-        if (layer.feature){
-            var attributeValue = Number(layer.feature.properties[attributes]);
-            //test for min
-            if (attributeValue < min){
-                min = attributeValue;
-            };
-            //test for max
-            if (attributeValue > max){
-                max = attributeValue;
-            };
-        };
-    });
-    //set mean
-    var mean = (max + min) / 2;
-    //return values as an object
-    return {
-        max: max,
-        mean: mean,
-        min: min
-    };
-};
-
-//Update the legend with new attribute
-function updateLegend(map, attributes){
-    //create content for legend
-    var year = attributes;
-    var content = "Real GDP in " + year;
-    //replace legend content
-    $('#temporal-legend').html(content);
-    //get the max, mean, and min values as an object
-    var circleValues = getCircleValues(map, attributes);
-    for (var key in circleValues){
-        //get the radius
-        var radius = calcPropRadius(circleValues[key]);
-        //assign the cy and r attributes
-        $('#'+key).attr({
-            cy: 92 - radius,
-            r: radius
-        });
-        //add legend text
-        $('#'+key+'-text').text("$" + Math.round(circleValues[key]*100)/100 + " million");
-    };
-};
-
-/*
-function createFilter (map, attributes){
-    $('.menu-ui a').on('click', function() {
-        // For each filter link, get the 'data-filter' attribute value.
-        var filter = $(this).data('filter');
-        $(this).addClass('active').siblings().removeClass('active');
-        pointToLayer.setFilter(function(f) {
-            // If the data-filter attribute is set to "all", return
-            // all (true). Otherwise, filter on markers that have
-            // a value set to true based on the filter name.
-            return (filter === 'all') ? true : f.properties[filter] === true;
-        });
-        return false;
-    });
-}
-
-
-function createFilter (data, properties, map, attributes) {
-    var attribute = attributes[0];
-    console.log(attribute);
-    var state = properties.city
-
-}
-*/
-
-//Import GeoJSON data
-$.ajax("data/realGDP.geojson", {
-    dataType: "json",
-    success: function(response){
-        //create an attributes array
-        var attributes = processData(response);
-        //call function to create
-        //createFilter (map, attributes);
-        createPropSymbols(response, map, attributes);
-        createSequenceControls(map, attributes);
-        createLegend(map, attributes);
-    }
-});
+//jquery method ready() makes sure entire page has loaded
+$(document).ready(addMap);
