@@ -177,6 +177,7 @@ function updatePropSymbols(map, attributes){
             layer.setRadius(radius);
             createPopup(props, attributes, layer, radius);
             updateLegend(map, attributes);
+            updateSequenceControls(map, attributes);
         };
     });
 };
@@ -210,6 +211,14 @@ function getCircleValues(map, attributes){
     };
 };
 
+function updateSequenceControls(map, attributes){
+    //create content for temporal div
+    var year = attributes;
+    var content = "Year: " + year;
+    //replace legend content
+    $('#time-legend').html(content);
+};
+
 //Create new sequence controls
 function createSequenceControls(map, attributes){
     var SequenceControl = L.Control.extend({
@@ -219,6 +228,8 @@ function createSequenceControls(map, attributes){
         onAdd: function (map) {
             // create the control container div with a particular class name
             var container = L.DomUtil.create('div', 'sequence-control-container');
+            //add temporal div to container
+            $(container).append('<div id="time-legend">');
             //create range input element (slider)
             $(container).append('<input class="range-slider" type="range">');
             //skip buttons
@@ -241,6 +252,7 @@ function createSequenceControls(map, attributes){
         }
      });
     map.addControl(new SequenceControl());
+    updateSequenceControls(map, attributes[0]);
     //set slider attributes
     $('.range-slider').attr({
         max: 17,
@@ -311,7 +323,7 @@ function createLegend(map, attributes){
             // create the control container with a particular class name
             var container = L.DomUtil.create('div', 'legend-control-container');
             //add temporal legend div to container
-            $(container).append('<div id="temporal-legend">')
+            $(container).append('<div id="temporal-legend">');
             //start attribute legend svg string
             var svg = '<svg id="attribute-legend" width="190px" height="170px" margin="center">';
             //object to base loop on...replaces Example 3.10 line 1

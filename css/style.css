@@ -23,10 +23,14 @@ margin-top: 25px;
     height: 35px;
 }
 
+#time-legend { margin: -20px;
+
+}
+
 .sequence-control-container {
     width: 297px;
-    height: 30px;
-    background-color: rgba(255,255,255,0.8);
+    height: 40px;
+    background-color: rgba(255,255,255,0.9);
     padding: 10px;
     line-height: 45px;
     text-align: center;
@@ -40,7 +44,7 @@ margin-top: 25px;
 .legend-control-container {
     width: 195px;
     height: 105px;
-    background-color: rgba(255,255,255,0.8);
+    background-color: rgba(255,255,255,0.9);
     padding: 10px;
     line-height: 15px;
     text-align: center;
@@ -109,7 +113,7 @@ padding-right: 100px;
 font-size: 10px;
 }
 
-html {background-color: rgba(51, 204, 51, 0.2);
+html {background-color: rgba(51, 204, 51, 0.25);
 }
 
 .leaflet-popup-content p { font-size: 12px;
@@ -131,7 +135,7 @@ margin-top: -15px;
 margin-bottom: 20px;
 }
 
-.filter-map { background-color: rgba(255,255,255,0.5);
+.filter-map { background-color: rgba(255,255,255,0.8);
 border:1px solid rgba(0,0,0,0.4);
 
 }
