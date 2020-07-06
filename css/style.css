@@ -32,7 +32,8 @@
 .sequence-control-container {
     width: 297px;
     height: 40px;
-    background-color: rgba(255,255,255,0.9);
+    background-color: #f4fcf4;
+    opacity: .9;
     padding: 10px;
     line-height: 45px;
     text-align: center;
@@ -46,7 +47,8 @@
 .legend-control-container {
     width: 195px;
     height: 105px;
-    background-color: rgba(255,255,255,0.9);
+    background-color: #f4fcf4;
+    opacity: .9;
     padding: 10px;
     line-height: 15px;
     text-align: center;
@@ -106,6 +108,12 @@ h1 {
     font-family: Arial;
 }
 
+h2 {
+    font-size: 16px;
+    text-align: center;
+    font-family: Arial;
+}
+
 p {
     text-align: justify;
     padding-left: 15px;
@@ -121,13 +129,16 @@ html {
     background-color: #cbf2cb;
 }
 
+
+.leaflet-popup
 .leaflet-popup-content p {
-    font-size: 12px;
+    font-size: 13px;
     font-family: serif;
-    font-weight: bolder;
-    padding: 0;
-    margin: -55px;
-    list-style: none;
+    margin-top: -2px;
+    margin-left: -20px;
+    margin-right: -20px;
+    margin-bottom: -2px;
+
 }
 
 .panel {
@@ -148,3 +159,5 @@ html {
 .col-xs-4 {
     display: inline;
 }
+
+.imglink:hover { opacity: .8;}

@@ -152,14 +152,14 @@ function calcPropRadius(attValue) {
 
 function createPopup(properties, attributes, layer, radius){
     //added Metropolitan Stastical Area
-    var popupContent = "<p><b>MSA: " + properties.MSA + "</p>";
+    var popupContent = "<p>MSA: <b>" + properties.MSA + "</b></p>";
     //add city to popup content string
-    popupContent += "<p><b>Predominantly Associated City:</b> " + properties.city + "</p>";
+    popupContent += "<p>Predominantly Associated City: <b>" + properties.city + "</b></p>";
     //add formatted attribute to panel content string
     var year = attributes;
-    popupContent += "<p><b>MSA's GDP in " + year + ":</b> $" + properties[attributes] + " billion</p>";
+    popupContent += "<p>MSA's GDP in " + year + ": <b>$" + properties[attributes] + " billion</b></p>";
     //added states containing MSA
-    popupContent += "<p><b>MSA's States: " + properties.states + "</p>";
+    popupContent += "<p>MSA's States:<b>" + properties.states + "</b></p>";
     //replace the layer popup
     layer.bindPopup(popupContent, {
         offset: new L.Point(0,-radius)
