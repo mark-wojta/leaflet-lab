@@ -123,6 +123,7 @@ p {
 footer {
     text-align: center;
     font-size: 10px;
+    list-style-position: inside;
 }
 
 html {
