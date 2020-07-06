@@ -157,7 +157,7 @@ function createPopup(properties, attributes, layer, radius){
     popupContent += "<p>Predominantly Associated City: <b>" + properties.city + "</b></p>";
     //add formatted attribute to panel content string
     var year = attributes;
-    popupContent += "<p>MSA's GDP in " + year + ": <b>$" + properties[attributes] + " billion</b></p>";
+    popupContent += "<p>MSA's Real GDP in " + year + ": <b>$" + properties[attributes] + " billion</b></p>";
     //added states containing MSA
     popupContent += "<p>MSA's States:<b>" + properties.states + "</b></p>";
     //replace the layer popup
