@@ -126,6 +126,12 @@ footer {
     list-style-position: inside;
 }
 
+ul {
+  text-align: center;
+  font-size: 10px;
+  list-style-position: inside;
+}
+
 html {
     background-color: #cbf2cb;
 }
@@ -161,4 +167,6 @@ html {
     display: inline;
 }
 
-.imglink:hover { opacity: .8;}
+.imglink:hover {
+    opacity: .8;
+}
